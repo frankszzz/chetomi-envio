@@ -28,7 +28,7 @@ RUN mkdir -p instance
 RUN python seed_data.py
 
 # Exponer puerto
-EXPOSE 5010
+EXPOSE 4010
 
 # Comando de inicio con Gunicorn
 CMD ["gunicorn", "--bind", "0.0.0.0:5010", "--workers", "2", "--timeout", "60", "--access-logfile", "-", "--error-logfile", "-", "app:app"]
