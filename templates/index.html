@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipping API - Jumpseller Integration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .main-card {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border-radius: 15px;
+        }
+        .card-header {
+            border-radius: 15px 15px 0 0 !important;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        .table-rates {
+            background: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="card main-card">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="mb-0">🚚 Shipping API - Jumpseller Chile</h2>
+                        <p class="mb-0 mt-2">Cálculo automático de tarifas de envío con OpenRouteService</p>
+                    </div>
+                    <div class="card-body p-4">
+                        
+                        <!-- API Endpoints -->
+                        <h4 class="mb-3">📡 API Endpoints</h4>
+                        <ul class="list-group mb-4">
+                            <li class="list-group-item">
+                                <strong>GET</strong> <code>/shipping/services</code>
+                                <br><small class="text-muted">Lista servicios de envío disponibles según horario</small>
+                            </li>
+                            <li class="list-group-item">
+                                <strong>POST</strong> <code>/shipping/rates</code>
+                                <br><small class="text-muted">Calcula tarifas de envío según distancia real</small>
+                            </li>
+                            <li class="list-group-item">
+                                <strong>GET</strong> <code>/health</code>
+                                <br><small class="text-muted">Health check y estado del servicio</small>
+                            </li>
+                        </ul>
+                        
+                        <!-- Configuración Jumpseller -->
+                        <div class="alert alert-info">
+                            <h5>📋 Configuración en Jumpseller:</h5>
+                            <p class="mb-2"><strong>1.</strong> Ve a: Admin → Checkout → Shipping → External Shipping Methods</p>
+                            <p class="mb-2"><strong>2.</strong> Callback URL: <code>https://tu-dominio.com/shipping/rates</code></p>
+                            <p class="mb-0"><strong>3.</strong> Services URL: <code>https://tu-dominio.com/shipping/services</code></p>
+                        </div>
+                        
+                        <!-- Servicios -->
+                        <div class="alert alert-success">
+                            <h5>⏰ Servicios Disponibles:</h5>
+                            <p class="mb-2">🌅 <strong>Envío Hoy:</strong> Disponible de 00:01 a 18:00 hrs (hora Chile)</p>
+                            <p class="mb-0">📅 <strong>Envío Programado:</strong> Disponible 24/7</p>
+                        </div>
+                        
+                        <!-- Tarifas -->
+                        <h5 class="mb-3">💰 Tarifas por Distancia</h5>
+                        <table class="table table-striped table-bordered table-rates mb-4">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Rango (km)</th>
+                                    <th>Precio (CLP)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>0.0 - 3.0 km</td>
+                                    <td><strong>$3,500</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>3.0 - 4.0 km</td>
+                                    <td><strong>$4,500</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>4.0 - 5.0 km</td>
+                                    <td><strong>$5,000</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>5.0 - 6.0 km</td>
+                                    <td><strong>$5,500</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>6.0 - 7.0 km</td>
+                                    <td><strong>$6,500</strong></td>
+                                </tr>
+                                <tr class="table-danger">
+                                    <td>7.0+ km</td>
+                                    <td><strong>NO DISPONIBLE</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <!-- Botones -->
+                        <div class="d-grid gap-2">
+                            <a href="/admin" class="btn btn-primary btn-lg">
+                                🔧 Panel de Administración
+                            </a>
+                            <a href="/health" class="btn btn-outline-secondary" target="_blank">
+                                ✅ Verificar Estado del Servicio
+                            </a>
+                        </div>
+                        
+                        <!-- Footer -->
+                        <hr class="my-4">
+                        <p class="text-center text-muted mb-0">
+                            <small>Powered by OpenRouteService | Flask | SQLite</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
