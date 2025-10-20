@@ -51,18 +51,21 @@ class ShippingRateAdmin(ModelView):
     column_sortable_list = ('min_km', 'max_km', 'price')
     can_export = True
 
-class DeliveryLogAdmin(ModelView):
-    can_create = False
-    can_edit = False
-    can_delete = True
-    column_list = ('timestamp', 'from_address', 'to_address', 'distance_km', 'service_code', 'calculated_price')
+
+class ShippingRateAdmin(ModelView):
+    column_list = ('service_id', 'min_km', 'max_km', 'price', 'active')
     column_labels = {
-        'timestamp': 'Fecha/Hora',
-        'from_address': 'Origen',
-        'to_address': 'Destino',
-        'distance_km': 'Distancia (km)',
-        'service_code': 'Servicio',
-        'calculated_price': 'Precio (CLP)'
+        'service_id': 'ID Servicio',
+        'min_km': 'KM Mínimo',
+        'max_km': 'KM Máximo',
+        'price': 'Precio (CLP)',
+        'active': 'Activo'
+    }
+    form_columns = ('service_id', 'min_km', 'max_km', 'price', 'active')
+    column_filters = ('service_id', 'active')
+    column_sortable_list = ('min_km', 'max_km', 'price')
+    can_export = True
+
     }
     column_filters = ('service_code', 'timestamp')
     column_sortable_list = ('timestamp', 'distance_km', 'calculated_price')
