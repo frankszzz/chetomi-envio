@@ -82,11 +82,11 @@ def seed_database():
         print("="*70)
         
         print("\n🌐 URLs importantes:")
-        print("   - API Base: http://localhost:5010")
-        print("   - Panel Admin: http://localhost:5010/admin")
-        print("   - Health Check: http://localhost:5010/health")
-        print("   - Test Geocode: http://localhost:5010/test/geocode?address=Tu+Direccion")
-        print("   - Test Distance: http://localhost:5010/test/distance?from=Dir1&to=Dir2")
+        print("   - API Base: http://localhost:4010")
+        print("   - Panel Admin: http://localhost:4010/admin")
+        print("   - Health Check: http://localhost:4010/health")
+        print("   - Test Geocode: http://localhost:4010/test/geocode?address=Tu+Direccion")
+        print("   - Test Distance: http://localhost:4010/test/distance?from=Dir1&to=Dir2")
         print("\n")
 
 if __name__ == '__main__':
