@@ -36,23 +36,6 @@ class ShippingServiceAdmin(ModelView):
     can_export = True
 
 class ShippingRateAdmin(ModelView):
-    # ✅ CORREGIDO: Eliminado 'service' de column_list
-    column_list = ('service_id', 'min_km', 'max_km', 'price', 'active')
-    column_labels = {
-        'service_id': 'ID Servicio',
-        'min_km': 'KM Mínimo',
-        'max_km': 'KM Máximo',
-        'price': 'Precio (CLP)',
-        'active': 'Activo'
-    }
-    # ✅ CORREGIDO: Cambiado 'service' por 'service_id'
-    form_columns = ('service_id', 'min_km', 'max_km', 'price', 'active')
-    column_filters = ('service_id', 'active')
-    column_sortable_list = ('min_km', 'max_km', 'price')
-    can_export = True
-
-
-class ShippingRateAdmin(ModelView):
     column_list = ('service_id', 'min_km', 'max_km', 'price', 'active')
     column_labels = {
         'service_id': 'ID Servicio',
@@ -66,6 +49,18 @@ class ShippingRateAdmin(ModelView):
     column_sortable_list = ('min_km', 'max_km', 'price')
     can_export = True
 
+class DeliveryLogAdmin(ModelView):
+    can_create = False
+    can_edit = False
+    can_delete = True
+    column_list = ('timestamp', 'from_address', 'to_address', 'distance_km', 'service_code', 'calculated_price')
+    column_labels = {
+        'timestamp': 'Fecha/Hora',
+        'from_address': 'Origen',
+        'to_address': 'Destino',
+        'distance_km': 'Distancia (km)',
+        'service_code': 'Servicio',
+        'calculated_price': 'Precio (CLP)'
     }
     column_filters = ('service_code', 'timestamp')
     column_sortable_list = ('timestamp', 'distance_km', 'calculated_price')
@@ -75,10 +70,6 @@ class ShippingRateAdmin(ModelView):
 admin.add_view(ShippingServiceAdmin(ShippingService, db.session, name='Servicios'))
 admin.add_view(ShippingRateAdmin(ShippingRate, db.session, name='Tarifas'))
 admin.add_view(DeliveryLogAdmin(DeliveryLog, db.session, name='Historial'))
-
-# ============= RESTO DEL CÓDIGO SIN CAMBIOS =============
-# (Mantén todo lo demás igual: @app.route, etc.)
-
 
 # ============= API ENDPOINTS =============
 
@@ -123,25 +114,6 @@ def get_services():
 def calculate_rates():
     """
     Endpoint para Jumpseller: Calcula tarifas de envío
-    
-    Espera recibir:
-    {
-        "request": {
-            "request_reference": "ORDER-123",
-            "from": {
-                "address": "Dirección tienda",
-                "city": "Santiago",
-                "latitude": -33.4489,
-                "longitude": -70.6693
-            },
-            "to": {
-                "address": "Dirección cliente",
-                "city": "Providencia",
-                "latitude": -33.4250,
-                "longitude": -70.6100
-            }
-        }
-    }
     """
     data = request.json
     request_data = data.get('request', {})
