@@ -36,16 +36,18 @@ class ShippingServiceAdmin(ModelView):
     can_export = True
 
 class ShippingRateAdmin(ModelView):
-    column_list = ('service', 'min_km', 'max_km', 'price', 'active')
+    # ✅ CORREGIDO: Eliminado 'service' de column_list
+    column_list = ('service_id', 'min_km', 'max_km', 'price', 'active')
     column_labels = {
-        'service': 'Servicio',
+        'service_id': 'ID Servicio',
         'min_km': 'KM Mínimo',
         'max_km': 'KM Máximo',
         'price': 'Precio (CLP)',
         'active': 'Activo'
     }
-    form_columns = ('service', 'min_km', 'max_km', 'price', 'active')
-    column_filters = ('service', 'active')
+    # ✅ CORREGIDO: Cambiado 'service' por 'service_id'
+    form_columns = ('service_id', 'min_km', 'max_km', 'price', 'active')
+    column_filters = ('service_id', 'active')
     column_sortable_list = ('min_km', 'max_km', 'price')
     can_export = True
 
@@ -70,6 +72,10 @@ class DeliveryLogAdmin(ModelView):
 admin.add_view(ShippingServiceAdmin(ShippingService, db.session, name='Servicios'))
 admin.add_view(ShippingRateAdmin(ShippingRate, db.session, name='Tarifas'))
 admin.add_view(DeliveryLogAdmin(DeliveryLog, db.session, name='Historial'))
+
+# ============= RESTO DEL CÓDIGO SIN CAMBIOS =============
+# (Mantén todo lo demás igual: @app.route, etc.)
+
 
 # ============= API ENDPOINTS =============
 
